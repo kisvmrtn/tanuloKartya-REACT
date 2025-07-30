@@ -1,8 +1,14 @@
-import { useState } from "react";
-import LearningCard from "./LearningCard";
-import ScoreSaver from "./ScoreSaver";
-import { konnyuKerdesek } from "./konnyuKerdesek";
-import { nehezKerdesek } from "./nehezKerdesek";
+import { useMemo, useState } from 'react';
+import LearningCard from './LearningCard';
+import ScoreSaver from './ScoreSaver';
+import { konnyuKerdesek } from './konnyuKerdesek';
+import { nehezKerdesek } from './nehezKerdesek';
+import { DifficultySelector } from './components/DifficultySelector';
+
+export const difficulty = {
+  EASY: konnyuKerdesek,
+  HARD: nehezKerdesek,
+};
 
 export default function LearningCards() {
   const [level, setLevel] = useState(null);
@@ -10,10 +16,10 @@ export default function LearningCards() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleLevelBtn = (level) => {
-    setLevel(level);
+    setLevel(difficulty[level]);
   };
 
-  const handleScore = () => {
+  const handleGoodScore = () => {
     setScore((prev) => prev + 1);
   };
 
@@ -22,42 +28,31 @@ export default function LearningCards() {
     console.log(currentIndex);
   };
 
-  const isFinished = currentIndex === konnyuKerdesek.length;
+  const isFinished = useMemo(() => {
+    return currentIndex === level?.length;
+  }, [currentIndex, level]);
+
+  const currentScore = useMemo(() => {
+    return `${score} / ${level?.length}`;
+  }, [score, level]);
 
   return (
     <>
       <main>
         <h1>TanulóKártya</h1>
-        {level ? (
-          ""
-        ) : (
-          <button id="easyBtn" onClick={() => handleLevelBtn(konnyuKerdesek)}>
-            Könnyű kérdések
-          </button>
-        )}
-        {level ? (
-          ""
-        ) : (
-          <button id="hardBtn" onClick={() => handleLevelBtn(nehezKerdesek)}>
-            Nehéz kérdések
-          </button>
-        )}
+        {!level && <DifficultySelector handleLevelBtn={handleLevelBtn} />}
         {level ? (
           <LearningCard
             list={level}
-            onGoodAnswer={handleScore}
+            onGoodAnswer={handleGoodScore}
             onNext={handleNext}
           ></LearningCard>
         ) : (
           <p>Válassz egy nehézségi szintet a kezdéshez!</p>
         )}
-        {isFinished ? (
-          <ScoreSaver score={score} maxScore={currentIndex}></ScoreSaver>
-        ) : (
-          ""
-        )}
+        {isFinished && <ScoreSaver score={score} maxScore={currentIndex} />}
         <div className="score">
-          Pontjaid: <br /> {score} / {konnyuKerdesek.length}
+          Pontjaid: <br /> {currentScore}
         </div>
       </main>
     </>

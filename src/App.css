@@ -1,5 +1,5 @@
 :root {
-  --hatter: #0f111a;
+  --background: #0f111a;
   --dobozHatter: #1a1f2b;
   --keretSzin: #2e3a59;
   --dobozBelső: #1d2230;
@@ -13,7 +13,7 @@
 }
 
 body.tema1 {
-  --hatter: #0f111a;
+  --background: #0f111a;
   --dobozHatter: #1a1f2b;
   --keretSzin: #2e3a59;
   --dobozBelső: #1d2230;
@@ -27,7 +27,7 @@ body.tema1 {
 }
 
 body.tema2 {
-  --hatter: #101426;
+  --background: #101426;
   --dobozHatter: #1a233a;
   --keretSzin: #2c3e50;
   --dobozBelső: #1e2a40;
@@ -41,7 +41,7 @@ body.tema2 {
 }
 
 body.tema3 {
-  --hatter: #170f23;
+  --background: #170f23;
   --dobozHatter: #22142d;
   --keretSzin: #3b2b47;
   --dobozBelső: #251a33;
@@ -55,8 +55,8 @@ body.tema3 {
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: var(--hatter);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--background);
   margin: 0;
   padding: 0;
   display: grid;

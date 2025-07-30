@@ -1,14 +1,14 @@
-import "./App.css";
-import ThemeSwitcher from "./ThemeSwitcher";
-import LearningCards from "./learningCards";
-import Leaderboard from "./Leaderboard";
+import './App.css';
+import ThemeSwitcher from './ThemeSwitcher';
+import LearningCards from './learningCards';
+import Leaderboard from './Leaderboard';
 
 function App() {
   return (
     <>
-      <Leaderboard></Leaderboard>
-      <ThemeSwitcher></ThemeSwitcher>
-      <LearningCards></LearningCards>
+      <Leaderboard />
+      <ThemeSwitcher />
+      <LearningCards />
     </>
   );
 }
